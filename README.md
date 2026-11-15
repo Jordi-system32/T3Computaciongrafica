@@ -35,3 +35,6 @@ Abre `http://localhost:4173` en el navegador y pulsa **Iniciar misión**. El ser
 ## Recursos
 
 Los modelos `sidearm-m9.glb`, `carbine-ak47.glb` e `infected.glb` son geometría low-poly generada para este proyecto con `generate-assets.mjs`. El juego utiliza Three.js 0.180.0 y GLTFLoader desde jsDelivr.
+git add README.md
+git commit -m "Resolver conflicto README"
+git push -u origin main
