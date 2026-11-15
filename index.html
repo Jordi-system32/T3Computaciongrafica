@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10150e" />
+    <title>Operación Extracción</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./game.js"></script>
+  </head>
+  <body>
+    <main id="game" aria-label="Operación Extracción, videojuego FPS">
+      <div id="viewport"></div>
+      <div class="film-grain" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <section class="hud" aria-live="polite">
+        <header class="mission-bar">
+          <div class="brand-lockup">
+            <span class="brand-mark">OE</span>
+            <span class="brand-name">OPERACIÓN <b>EXTRACCIÓN</b></span>
+          </div>
+          <div class="objective">
+            <span class="eyebrow">OBJETIVO</span>
+            <span id="objectiveText">Llega a la zona de extracción</span>
+          </div>
+          <div class="sector-tag"><span class="status-dot"></span><span id="sectorText">SECTOR 04 · BÚNKER</span></div>
+        </header>
+
+        <div class="crosshair" id="crosshair" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><b></b>
+        </div>
+
+        <div class="pickup-prompt" id="pickupPrompt" hidden>SUMINISTRO DE MUNICIÓN <span>ACÉRCATE PARA RECOGER</span></div>
+        <div class="hit-marker" id="hitMarker" aria-hidden="true">×</div>
+        <div class="damage-flash" id="damageFlash" aria-hidden="true"></div>
+
+        <footer class="status-bar">
+          <div class="health-block">
+            <span class="eyebrow">ESTADO</span>
+            <div class="health-readout"><span class="health-pip"></span><strong id="healthValue">100</strong><span class="unit">%</span></div>
+            <div class="health-track"><i id="healthFill"></i></div>
+          </div>
+          <div class="mission-progress">
+            <span class="eyebrow">DISTANCIA A EXTRACCIÓN</span>
+            <strong id="distanceValue">—</strong>
+            <div class="route-track"><i id="routeFill"></i></div>
+          </div>
+          <div class="ammo-block">
+            <div class="weapon-label"><span id="weaponName">M9 · SEMIAUTOMÁTICA</span><kbd id="weaponKey">1</kbd></div>
+            <div class="ammo-readout"><strong id="ammoValue">16</strong><span class="ammo-divider">/</span><span id="reserveValue">BALAS</span></div>
+            <div class="weapon-switch"><span><kbd>1</kbd> M9</span><span><kbd>2</kbd> AK-47</span></div>
+          </div>
+        </footer>
+      </section>
+
+      <section class="overlay briefing" id="briefing">
+        <div class="briefing-content">
+          <div class="classification"><span></span> TRANSMISIÓN DE EMERGENCIA · UPN</div>
+          <p class="overline">OPERACIÓN 07 / LIMA</p>
+          <h1>EXTRACCIÓN<span>.</span></h1>
+          <p class="briefing-copy">El perímetro cayó. Cruza el búnker, conserva munición y alcanza la baliza verde.</p>
+          <div class="briefing-meta">
+            <div><span class="eyebrow">AMENAZAS</span><strong>INFECTADOS</strong></div>
+            <div><span class="eyebrow">PUNTO DE ENTRADA</span><strong>SECTOR 04</strong></div>
+            <div><span class="eyebrow">EXTRACCIÓN</span><strong>35 M · NORTE</strong></div>
+          </div>
+          <button class="primary-action" id="startButton" type="button" disabled>
+            <span id="startLabel">CARGANDO MODELOS</span><b>↗</b>
+          </button>
+          <div class="control-line">
+            <span><kbd>W A S D</kbd> MOVER</span>
+            <span><kbd>MOUSE</kbd> MIRAR</span>
+            <span><kbd>CLIC</kbd> DISPARAR</span>
+            <span><kbd>R</kbd> RECOGER CAJA</span>
+          </div>
+        </div>
+        <div class="briefing-aside">
+          <div class="signal-ring"><span></span></div>
+          <span class="aside-label">SEÑAL DE EXTRACCIÓN</span>
+          <strong>EN ESPERA</strong>
+          <small>NO TE DETENGAS</small>
+        </div>
+      </section>
+
+      <section class="overlay pause-overlay" id="pauseOverlay" hidden>
+        <div class="result-panel">
+          <p class="overline">TRANSMISIÓN INTERRUMPIDA</p>
+          <h2>PAUSA<span>.</span></h2>
+          <p>La zona sigue infestada.</p>
+          <button class="primary-action" id="resumeButton" type="button"><span>CONTINUAR MISIÓN</span><b>↗</b></button>
+          <small>PULSA <kbd>ESC</kbd> PARA VOLVER AL JUEGO</small>
+        </div>
+      </section>
+
+      <section class="overlay ending-overlay" id="endingOverlay" hidden>
+        <div class="result-panel">
+          <p class="overline" id="endingOverline">OPERACIÓN 07 / LIMA</p>
+          <h2 id="endingTitle">MISIÓN COMPLETADA<span>.</span></h2>
+          <p id="endingCopy">Has llegado a la zona de extracción.</p>
+          <div class="result-stats"><span>INFECTADOS ELIMINADOS</span><strong id="killCount">0</strong></div>
+          <button class="primary-action" id="restartButton" type="button"><span>VOLVER A JUGAR</span><b>↗</b></button>
+        </div>
+      </section>
+
+      <p class="loading-note" id="loadingNote" role="status">PREPARANDO EQUIPO…</p>
+    </main>
+  </body>
+</html>
